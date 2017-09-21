@@ -1,0 +1,30 @@
+﻿<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-header">
+        <a href="/" class="navbar-brand"><span class="brand-title">{{vm.title}}</span></a>
+        <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <div class="pull-right navbar-logo">
+
+            <form ng-if="!vm.isLoggedIn()" class="navbar-form navbar-right" role="login" ng-submit="vm.login()">
+                <div class="form-group" ng-class="{'has-error': vm.error}">
+                  <input type="text" class="form-control input-sm" placeholder="Username" ng-model="vm.username" autocapitalize="none">
+                </div>
+                <div class="form-group" ng-class="{'has-error': vm.error}">
+                  <input type="password" class="form-control input-sm" placeholder="Password" ng-model="vm.password" autocapitalize="none">
+                </div>
+                <button type="submit" class="btn btn-sm btn-success">Login</button>
+            </form>
+
+            <ul ng-if="vm.isLoggedIn()" class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text">Welcome back {{ vm.loggedInUser }}</p></li>
+                <li><button class="navbar-btn btn-sm btn-info" ng-click="vm.logout()">Logout</button></li>
+            </ul>
+            
+        </div>
+    </div>
+</nav>
