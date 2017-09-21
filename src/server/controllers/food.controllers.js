@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Food = mongoose.model('Food');
 
-module.exports = function(req, res) {
+module.exports.getAll = function(req, res) {
 
     Food
         .find()
@@ -24,4 +24,4 @@ module.exports = function(req, res) {
 
         });
 
-}
+};

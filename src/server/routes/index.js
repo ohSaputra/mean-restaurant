@@ -5,14 +5,14 @@ module.exports = function(route) {
     // Food API
     route
         .route('/api/food')
-        .get(ctrlFood);
+        .get(ctrlFood.getAll);
 
     // Authentication
-    router
-        .route('/users/register')
-        .post(ctrlUsers.register);
+    route
+        .route('/users/register');
+        // .post(ctrlUsers.register);
 
-    router
-        .route('/users/login')
-        .post(ctrlUsers.login);
+    route
+        .route('/users/login');
+        // .post(ctrlUsers.login);
 };
