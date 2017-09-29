@@ -14,21 +14,43 @@
   "scripts": {
     "init": "npm install",
     "install": "bower install",
-    "start": "node src/server/app.js",
+    "start": "./node_modules/.bin/cross-env APP_ENV=development ./node_modules/.bin/nodemon src/server/app.js",
     "test": "gulp test"
   },
+  "nodemonConfig": {
+    "verbose": true,
+    "ignore": [
+      "src/client/*"
+    ]
+  },
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.8.2",
-    "compression": "^1.1.0",
+    "co": "^4.6.0",
+    "compression": "^1.7.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^1.3.2",
     "cors": "^2.2.0",
+    "cross-env": "^5.0.5",
+    "crypto": "^1.0.1",
+    "csurf": "^1.9.0",
+    "dotenv": "^4.0.0",
     "express": "^4.9.3",
+    "express-session": "^1.15.6",
     "jsonwebtoken": "^8.0.1",
-    "method-override": "^1.0.0",
+    "method-override": "^1.0.2",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.12",
     "morgan": "^1.1.1",
-    "serve-favicon": "^2.0.1"
+    "multer": "^1.3.0",
+    "nodemon": "^1.12.1",
+    "only": "0.0.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.0.1",
+    "view-helpers": "^0.1.5",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "browser-sync": "^1.6.5",
