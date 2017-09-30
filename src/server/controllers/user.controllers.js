@@ -15,8 +15,9 @@ const User = mongoose.model('User');
 
 exports.load = async(function* (req, res, next, _id) {
   const criteria = { _id };
+  const select = 'name username balance topup order';
   try {
-    req.profile = yield User.load({ criteria });
+    req.profile = yield User.load({ criteria, select });
     if (!req.profile) return next(new Error('User not found'));
   } catch (err) {
     return next(err);

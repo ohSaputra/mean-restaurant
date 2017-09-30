@@ -40,8 +40,16 @@ const UserSchema = new Schema({
     type: Number,
     default: 0
   },
-  topup: [],
-  order: [],
+  topup: [{
+    balance: { type: Number, default: 0 },
+    createdAt: { type : Date, default : Date.now }
+  }],
+  order: [{
+    foods: [{
+      food: { type: Schema.ObjectId, ref: 'Food'  }
+    }],
+    total: { type: Number, default: 0 }
+  }],
   role: {
     type: String,
     default: 'user'
@@ -61,7 +69,8 @@ const UserSchema = new Schema({
   authToken: { 
     type: String, 
     default: '' 
-  }
+  },
+  createdAt: { type : Date, default : Date.now }
 });
 
 const validatePresenceOf = value => value && value.length;
@@ -190,7 +199,41 @@ UserSchema.methods = {
 
   skipValidation: function () {
     return ~oAuthTypes.indexOf(this.provider);
+  },
+
+  /**
+   * Add balance
+   *
+   * @param {Object} topup
+   * @api private
+   */
+
+  addBalance: function (topup) {
+    this.topup.push({
+      balance: topup.balance
+    });
+    this.balance += topup.balance;
+
+    return this.save();
+  },
+
+  /**
+   * Add new order
+   *
+   * @param {Object} order
+   * @api private
+   */
+
+  addOrder: function (order) {
+    this.order.push({
+      foods: order.foods,
+      total: order.total
+    });
+    this.balance = this.balance - order.total;
+
+    return this.save();
   }
+
 };
 
 /**

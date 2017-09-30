@@ -6,6 +6,8 @@
 
 const ctrlFood = require('../controllers/food.controllers');
 const ctrlUser = require('../controllers/user.controllers');
+const ctrlTopup = require('../controllers/topup.controllers');
+const ctrlOrder = require('../controllers/order.controllers');
 
 /**
  * Expose routes
@@ -38,6 +40,16 @@ module.exports = function (app, passport) {
   app
     .route('/users/login')
     .post(pauth('local'), ctrlUser.session);
+
+  // topup routes
+  app
+    .route('/users/:userId/topup')
+    .post(ctrlTopup.create);
+
+  // order routes
+  app
+  .route('/users/:userId/order')
+  .post(ctrlOrder.create);
 
 
   /////////////////////////////////////////////////////
